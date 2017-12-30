@@ -1,6 +1,32 @@
 import java.util.*;
 class solutionCh4{
 
+	public static void printTreeInSpiral(TreeNode root){
+		boolean ltr=false;
+		int h= height(root);
+		for(int i=1;i<=h;i++){
+			ltr=true^ltr;
+			spiralHelp( root,  i, ltr);
+		}
+	}
+
+	public static void spiralHelp(TreeNode root, int level,boolean ltr){
+		if(root==null)
+			return;
+		if(level==1)
+			System.out.print(root.val+" ");
+		else{
+			if(ltr){
+				spiralHelp(root.left,level-1,ltr);
+				spiralHelp(root.right,level-1,ltr);
+			}
+			else{
+				spiralHelp(root.right,level-1,ltr);	
+				spiralHelp(root.left,level-1,ltr);
+			}
+		}
+	}
+
 	public static TreeNode mirrorOfTree(TreeNode root){
 		if(root == null)
 			return root;
@@ -10,6 +36,19 @@ class solutionCh4{
 		root.left= right;
 		root.right=left;
 		return root;
+	}
+
+	public static void printAGivenLevel(TreeNode root, int level){
+		if(root==null)
+			return;
+
+		if(level==1){
+			System.out.print(root.val+" ");
+		}
+		else{
+			printAGivenLevel(root.left,level-1);
+			printAGivenLevel(root.right,level-1);
+		}
 	}
 
 	public static TreeNode convertArrToTree(int[] arr){
@@ -105,6 +144,15 @@ class solutionCh4{
 		System.out.print("level order Traversal : ");
 		printLevelOrder(root);
 		System.out.println();
+		
+		System.out.print("Tree in spiral : ");
+		printTreeInSpiral(root);
+		System.out.println();
+
+		System.out.print("print level 3 : ");
+		printAGivenLevel(root,3);
+		System.out.println();
+
 		System.out.print("print Mirror : ");
 		printMirror(root);
 		System.out.println();
