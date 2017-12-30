@@ -1,6 +1,17 @@
 import java.util.*;
 class solutionCh4{
 
+	public static TreeNode mirrorOfTree(TreeNode root){
+		if(root == null)
+			return root;
+		TreeNode left = mirrorOfTree(root.left);
+		TreeNode right = mirrorOfTree(root.right);
+
+		root.left= right;
+		root.right=left;
+		return root;
+	}
+
 	public static TreeNode convertArrToTree(int[] arr){
 		return convertHelper(arr,0, arr.length-1);
 	}
@@ -94,8 +105,13 @@ class solutionCh4{
 		System.out.print("level order Traversal : ");
 		printLevelOrder(root);
 		System.out.println();
-		System.out.print("Mirror : ");
+		System.out.print("print Mirror : ");
 		printMirror(root);
 		System.out.println();
+		System.out.print("Mirror the tree : ");
+		root = mirrorOfTree(root);
+		printInOrder(root);
+		System.out.println();
+
 	}
 }
