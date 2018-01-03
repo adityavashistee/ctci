@@ -1,6 +1,17 @@
 import java.util.*;
 class solutionCh4{
 
+	public static boolean childSumProperty(TreeNode root){
+		if(root==null||(root.right==null && root.left==null)){
+			return true;
+		}
+		int right = root.right!=null? root.right.val : 0;
+		int left = root.left!=null? root.left.val:0;
+		if(root.val!=right+left)
+			return false;
+		return (childSumProperty(root.right) && childSumProperty(root.left));
+	}
+
 	public static void printTreeInSpiral(TreeNode root){
 		boolean ltr=false;
 		int h= height(root);
@@ -148,6 +159,12 @@ class solutionCh4{
 		System.out.print("Tree in spiral : ");
 		printTreeInSpiral(root);
 		System.out.println();
+
+		System.out.println("childSumProperty : "+childSumProperty(root));	
+
+		int[] arr1={1,1,3,2,2};
+		TreeNode root1 = convertArrToTree(arr1);	
+		System.out.println("childSumProperty : "+childSumProperty(root1));
 
 		System.out.print("print level 3 : ");
 		printAGivenLevel(root,3);
