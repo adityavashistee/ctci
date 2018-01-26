@@ -133,6 +133,36 @@ class solutionCh4{
 		}
 	}
 
+	public static void inOrderItr(TreeNode root){
+		if(root == null) return ;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		TreeNode node = root;
+		while (node !=null){
+			stack.push(node);
+			node=node.left;
+		}
+		while(!stack.isEmpty()){
+			node=stack.pop();
+			System.out.print(node.val +" ");
+			if(node.right!=null){
+				node=node.right;
+				// stack.push(node);
+				while(node!=null){
+					stack.push(node);
+					node=node.left;
+				}
+			}
+		}
+	}
+
+	public static void postOrderItr(TreeNode root){
+
+	}
+
+	public static void preOrderItr(TreeNode root){
+
+	}
+
 	public static void main(String[] args) {
 		int[] arr = {1,2,3,4,5,6,7,8,9};
 		for (int i=0;i<arr.length ;i++ ) {
@@ -149,6 +179,10 @@ class solutionCh4{
 		System.out.println();
 		System.out.print("post order Traversal : ");
 		postOrder(root);
+		System.out.println();
+
+		System.out.print("inorder iteratively : ");
+		inOrderItr(root);
 		System.out.println();
 
 		System.out.println("Height of the tree is : "+height(root));

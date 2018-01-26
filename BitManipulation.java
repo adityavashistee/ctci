@@ -36,6 +36,25 @@ class BitManipulation{
 		return output; 
 	}
 
+	public static String doubleToBinary(double d){
+		String output="0.";
+		int k=0;
+		while(k < 32 && d>0){
+			d=2*d;
+			if(d>=1) {
+				output=output+"1";
+				d=d-1;
+			}
+			else{
+				output=output+"0";
+			}
+			k++;
+		}
+		System.out.println(d);
+		if(d!=0) output="Error";
+		return output;
+	}
+
 	public static void main(String[] args){
 		
 		System.out.println(check(16));
@@ -44,6 +63,7 @@ class BitManipulation{
 		System.out.println(noBitsRequiredToConvert(31,14));
 		System.out.println(swapTheAlternateBits(2));
 		System.out.println(insertNumber(1024, 10,2, 5));
+		System.out.println(doubleToBinary(0.75));
 
 		//System.out.println("bit manipulation");
 	}
