@@ -95,8 +95,8 @@ class solutionCh4{
 	}
 	public static void postOrder(TreeNode root){
 		if(root !=null){
-			printInOrder(root.left);
-			printInOrder(root.right);
+			postOrder(root.left);
+			postOrder(root.right);
 			System.out.print(root.val+" ");
 		}
 	}
@@ -104,8 +104,8 @@ class solutionCh4{
 	public static void preOrder(TreeNode root){
 		if(root !=null){
 			System.out.print(root.val+" ");
-			printInOrder(root.left);
-			printInOrder(root.right);
+			preOrder(root.left);
+			preOrder(root.right);
 			
 		}
 	}
@@ -156,11 +156,34 @@ class solutionCh4{
 	}
 
 	public static void postOrderItr(TreeNode root){
-
+		if(root == null) return;
+		Stack<TreeNode> stack1 = new Stack<TreeNode>();
+		Stack<TreeNode> stack2 = new Stack<TreeNode>();
+		stack1.push(root);
+		while(!stack1.isEmpty()){
+			TreeNode node = stack1.pop();
+			if(node!=null) stack2.push(node);
+			if(node.left!=null)stack1.push(node.left);
+			if(node.right!=null) stack1.push(node.right);
+		}
+		while( !stack2.isEmpty())
+			System.out.print(stack2.pop().val +" ");
 	}
 
 	public static void preOrderItr(TreeNode root){
+		if(root==null) return;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		stack.push(root);
+		while(!stack.isEmpty()){
+			TreeNode node = stack.pop();
+			System.out.print(node.val+" ");
+			if(node.right!=null) stack.push(node.right);
+			if(node.left != null) stack.push(node.left);
+		}
+	}
 
+	public static void postOrderItrOneStack(TreeNode root){
+		
 	}
 
 	public static void main(String[] args) {
@@ -183,6 +206,14 @@ class solutionCh4{
 
 		System.out.print("inorder iteratively : ");
 		inOrderItr(root);
+		System.out.println();
+
+		System.out.print("pre order iteratively : ");
+		preOrderItr(root);
+		System.out.println();
+
+		System.out.print("post order iteratively : ");
+		postOrderItr(root);
 		System.out.println();
 
 		System.out.println("Height of the tree is : "+height(root));
